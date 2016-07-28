@@ -1,10 +1,16 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :update, :destroy]
-  before_action :require_user
+  before_action :require_user, except: [:index]
 
   # GET /notes
   def index
-    render json: current_user, serializer: UserWithNotesSerializer
+    if current_user
+      @notes = current_user.notes
+      render json: @notes, scope: current_user, scope_name: :current_user
+    else
+      @notes = Note.all
+      render json: @notes
+    end
   end
 
   # GET /notes/1
