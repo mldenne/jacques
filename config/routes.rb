@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   scope :api do
     resources :notes
-    get 'notes/tag/:name' => 'notes#show'
+    get 'notes/tag/:name' => 'tags#show'
   end
 
 end
