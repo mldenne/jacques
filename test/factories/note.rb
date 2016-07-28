@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :note do
     title { Faker::Book.title }
     body  { Faker::Hipster.paragraphs(6).join("\n\n") }
+    user 
 
     transient do
       tag_count   5
