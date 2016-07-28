@@ -4,9 +4,7 @@ class NotesController < ApplicationController
 
   # GET /notes
   def index
-    @notes = current_user.notes
-
-    render json: @notes
+    render json: current_user, serializer: UserWithNotesSerializer
   end
 
   # GET /notes/1
@@ -33,6 +31,11 @@ class NotesController < ApplicationController
   # PATCH/PUT /notes/1
   def update
     if @note.update(note_params)
+      if params[:tags]
+        params[:tags].split(",").map(&:strip).each do |string|
+          @note.tags << Tag.find_or_initialize_by(name: string)
+        end
+      end
       render json: @note
     else
       render json: {errors: @note.errors.full_messages.map{ |m| {error: m} }}, status: :unprocessable_entity
