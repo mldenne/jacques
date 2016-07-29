@@ -7,7 +7,8 @@ Jacques, a frontend developer is working with backend developers on the Notemeis
 ### Route 1
 `GET /api/notes`
 
-```{
+```json
+{
   "notes" : [
     {
       "title" : "My awesome post",
@@ -41,7 +42,8 @@ Notes without a title or body, should generate a JSON-formatted error message an
 ### Route 2
 `GET /api/notes/tag/funny`
 
-```{
+```json
+{
   "tag" : {
     "name" : "funny"
   },
