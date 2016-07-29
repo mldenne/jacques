@@ -1,24 +1,73 @@
-## README
+# Jacques
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
 
-Things you may want to cover:
+Jacques, a frontend developer is working with backend developers on the Notemeister 5000 application.  The layout is as follows:
 
-* Ruby version
+### Route 1
+`GET /api/notes`
 
-* System dependencies
+```{
+  "notes" : [
+    {
+      "title" : "My awesome post",
+      "body" : "My awesome body of a post",
+      "created_at" : "<timestamp>",
+      "updated_at" : "<timestamp>",
+      "tags" : [
+        { "name" : "awesome" },
+        { "name" : "funny" },
+        { "name" : "spiffy" }
+      ]
+    },
+    {
+      "title" : "My awesome second post",
+      "body" : "My awesome body of a second post",
+      "created_at" : "<timestamp>",
+      "updated_at" : "<timestamp>",
+      "tags" : [
+        { "name" : "not_so_awesome" },
+        { "name" : "not_funny" },
+        { "name" : "not_at_all_spiffy" }
+      ]
+    }
+  ]
+}
+```
 
-* Configuration
 
-* Database creation
+Notes without a title or body, should generate a JSON-formatted error message and a status code of 400.
 
-* Database initialization
+### Route 2
+`GET /api/notes/tag/funny`
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```{
+  "tag" : {
+    "name" : "funny"
+  },
+  "notes" : [
+    {
+      "title" : "My awesome post",
+      "body" : "My awesome body of a post",
+      "created_at" : "<timestamp>",
+      "updated_at" : "<timestamp>",
+      "tags" : [
+        { "name" : "awesome" },
+        { "name" : "funny" },
+        { "name" : "spiffy" }
+      ]
+    },
+    {
+      "title" : "My awesome second post",
+      "body" : "My awesome body of a second post",
+      "created_at" : "<timestamp>",
+      "updated_at" : "<timestamp>",
+      "tags" : [
+        { "name" : "not_so_awesome" },
+        { "name" : "funny" },
+        { "name" : "not_at_all_spiffy" }
+      ]
+    }
+  ]
+}
+```
