@@ -7,15 +7,15 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true
 
-  validates :auth_token, presence: true, uniqueness: true
+  validates :api_token, presence: true, uniqueness: true
 
-  before_validation :generate_auth_token, on: :create
+  before_validation :generate_api_token, on: :create
 
   private
 
-  def generate_auth_token
-    while auth_token.blank? || User.exists?(auth_token: auth_token)
-      self.auth_token = SecureRandom.hex(10)
+  def generate_api_token
+    while api_token.blank? || User.exists?(api_token: api_token)
+      self.api_token = SecureRandom.hex(10)
     end
   end
 

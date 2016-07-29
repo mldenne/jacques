@@ -3,8 +3,8 @@ class ApplicationController < ActionController::API
   private
 
   def current_user
-    if params[:auth_token] && User.exists?(auth_token: params[:auth_token])
-      @user ||= User.find_by(auth_token: params[:auth_token])
+    if params[:api_token] && User.exists?(api_token: params[:api_token])
+      @user ||= User.find_by(api_token: params[:api_token])
     end
     @user
   end
