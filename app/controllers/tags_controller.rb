@@ -10,10 +10,8 @@ class TagsController < ApplicationController
 
   # GET /tags/1
   def show
-    @tag = set_tag
-
     render json: {tag: {name: @tag.name}}
-      .merge(ActiveModelSerializers::SerializableResource.new(@tag.notes).as_json)
+      .merge({notes: @tag.notes.map{|note| NoteSerializer.new(note).as_json}})
   end
 
   # POST /tags
@@ -44,7 +42,7 @@ class TagsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tag
-      @tag = Tag.find_by(params[:name])
+      @tag = Tag.find_by(name: params[:name])
     end
 
     # Only allow a trusted parameter "white list" through.
