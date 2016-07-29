@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
-  before_action :set_note, only: [:show, :update, :destroy]
-  before_action :require_user, except: [:index]
+  before_action :set_note, only: [:update, :destroy]
+  before_action :require_user, except: [:index, :show]
 
   # GET /notes
   def index
@@ -15,7 +15,13 @@ class NotesController < ApplicationController
 
   # GET /notes/1
   def show
-    render json: @note
+    if current_user
+      @notes = current_user.notes
+      render json: @notes, scope: current_user, scope_name: :current_user
+    else
+      @notes = Note.all
+      render json: @notes
+    end
   end
 
   # POST /notes
