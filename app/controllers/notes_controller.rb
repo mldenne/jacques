@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:update, :destroy]
-  before_action :require_user, except: [:index, :show]
+  before_action :require_user, except: [:index, :show, :create]
 
   # GET /notes
   def index
@@ -26,7 +26,7 @@ class NotesController < ApplicationController
 
   # POST /notes
   def create
-    @note = current_user.new(note_params)
+    @note = Note.new
 
     if @note.save
       if params[:tags]
