@@ -15,13 +15,7 @@ class NotesController < ApplicationController
 
   # GET /notes/1
   def show
-    if current_user
-      @notes = current_user.notes
-      render json: @notes, scope: current_user, scope_name: :current_user
-    else
-      @notes = Note.all
-      render json: @notes
-    end
+    render json: @note
   end
 
   # POST /notes
